@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "~/*": ["./src/*"],
+      "~/__constants__/*": ["./src/__constants__/*"],
+      "~/modules/*": ["./src/modules/*"]
+    }
+  }
+}
