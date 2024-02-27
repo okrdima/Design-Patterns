@@ -10,6 +10,7 @@
 
 **Question Types**:
 
+### Lab 1 ###
 1. Single Choice: Suitable for single topics and skill levels.
 Example: "What is the past tense of 'to go'?"
 (a) went
@@ -76,3 +77,27 @@ class QuestionFactoryManager {
     }
 }
 ```
+### Lab2 ###
+
+Course Structure Ideas for English Online Course Platform:
+1. Skill-Based Approach:
+ - Organize courses based on specific English language skills, such as:
+ - Grammar: Courses focused on specific grammar topics like tenses, subject-verb agreement, or verb conjugations.
+ - Vocabulary: Courses focused on building vocabulary in different contexts like business, travel, or everyday use.
+ - Reading Comprehension: Courses aimed at improving reading skills through various texts and exercises.
+ - Listening Comprehension: Courses focused on improving listening skills through audio lessons and activities.
+ - Speaking & Pronunciation: Courses designed to improve spoken English, including pronunciation practice and conversation exercises.
+2. Level-Based Approach:
+ - Organize courses based on learner proficiency levels, following the Common European Framework of Reference for Languages (CEFR) (A1, A2, B1, B2, C1, C2).
+ - Each level will offer courses tailored to the specific learning objectives and challenges faced by learners at that stage.
+3. Thematic Approach:
+ - Create courses focused on specific themes or topics, such as:
+ - Business English: Develop skills needed for professional communication.
+ - Academic English: Prepare learners for academic writing and research.
+ - Conversational English: Practice everyday conversation skills.
+ - English for Travel: Learn essential vocabulary and phrases for travel situations.
+4. Mixed Approach:
+
+ - Combine elements of the above approaches to create comprehensive courses that cater to various learning needs. For example, a course could focus on a specific theme (Business English) while incorporating different skills like grammar, vocabulary, and conversation within that theme.
+
+>Consider implementing the Prototype pattern for the Course module.
