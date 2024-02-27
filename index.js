@@ -4,6 +4,7 @@ const {
   QuestionAbstractFactory,
 } = require("~/modules/Fabric");
 const { QUESTION_TYPES } = require("~/__constants__");
+const { BusinessEnglishCourse } = require("~/domains/Course");
 
 const {
   QuestionFactoryManager,
@@ -94,3 +95,17 @@ console.group("singleChoiceFactory");
 console.log(question.getQuestion());
 console.log(question.getAnswerKey());
 console.groupEnd();
+
+// Usage Example
+const businessEnglishPrototype = new BusinessEnglishCourse(
+  "Business English Essentials",
+  "B1",
+  "This course covers essential skills for communication in a business setting.",
+);
+
+const clonedCourse = businessEnglishPrototype.clone();
+
+clonedCourse.title = "Technical english";
+
+console.log(clonedCourse);
+console.log(clonedCourse.getModules());
