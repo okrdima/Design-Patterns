@@ -3,6 +3,7 @@ const CoursePrototype = require("./CoursePrototype");
 const CourseBuilder = require("./CourseBuilder");
 const CourseCompletionObserver = require("./CourseCompletionObserver");
 const CourseActionsCommand = require("./CourseActionsCommand");
+const CourseMediator = require("./CourseMediator");
 
 module.exports = {
   Course,
@@ -10,4 +11,5 @@ module.exports = {
   CourseBuilder,
   CourseCompletionObserver,
   CourseActionsCommand,
+  CourseMediator,
 };

@@ -10,6 +10,7 @@ const LessonIterator = require("~/modules/Iterator");
 const LessonState = require("~/modules/State");
 const PaymentChain = require("~/modules/Chain");
 const ExpressionInterpreter = require("~/modules/Interpreter");
+const CourseMediator = require("~/modules/Mediator");
 
 // Lab 1
 // FabricModule();
@@ -32,4 +33,5 @@ const ExpressionInterpreter = require("~/modules/Interpreter");
 // PaymentChain();
 
 // Lab 6
-ExpressionInterpreter();
+// ExpressionInterpreter();
+CourseMediator();

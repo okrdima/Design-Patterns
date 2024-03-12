@@ -1,10 +1,11 @@
 const uuid = require("uuid");
 const { PAYMENT_TYPES } = require("~/__constants__");
+const UserInterface = require("./UserInterface");
 
 /**
  * Represents a user object within the online course platform.
  */
-class User {
+class User extends UserInterface {
   /**
    * Creates a new User object.
    *
@@ -29,6 +30,7 @@ class User {
     balance = {},
     createdAt = new Date(),
   ) {
+    super();
     this._id = userId || uuid.v4(); // Generate random ID if not provided
     this.username = username;
     this.email = email;
@@ -58,6 +60,27 @@ class User {
       );
 
     return this.balance?.[paymentType] || 0;
+  }
+
+  /**
+   * Returns the user's username.
+   *
+   * @returns {string} The user's username.
+   */
+  getUserName() {
+    return this.username;
+  }
+
+  /**
+   * Receives a message sent to the user through the mediator.
+   *
+   * @param {string} message - The content of the message.
+   * @param {User} from - The user who sent the message.
+   */
+  receiveMessage(message, from) {
+    console.log(
+      `${this.role} ${this.username} received message: ${message} (from ${from.role} ${from.username})`,
+    );
   }
 }
 

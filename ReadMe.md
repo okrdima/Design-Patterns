@@ -2198,4 +2198,255 @@ class ConditionalExpression extends Expression {
   evaluate(context) {}
 }
 ```
-> Mediator patter for Expression Module
+> Mediator patter for Course Module and User Module
+
+#### User Stories:
+
+#### As a student, I want to ask a question about the course material to my instructor so that I can get clarification and improve my understanding.
+Acceptance criteria:
+* The Student can compose a message with their question.
+* The Student can select the instructor they want to send the question to.
+* The mediator routes the message to the chosen instructor.
+#### As a Teacher, I want to receive questions from students and respond to them so that I can provide support and address their concerns.
+Acceptance criteria:
+* The instructor sees all messages sent to them from students in the course.
+* The instructor can reply to individual student questions.
+* The mediator routes the instructor's response to the specific student who asked the question.
+#### As a student, I want to see a history of my messages with instructors so that I can easily refer back to previous questions and answers.
+Acceptance criteria:
+* The student has access to a list or log of their previous messages with instructors.
+* Each message shows the content, sender (student or instructor), and recipient (student or instructor).
+#### As a Teacher, I want to broadcast announcements or updates to all students enrolled in the course so that they are informed of important information.
+Acceptance criteria:
+* The Teacher can compose a message intended for all students.
+* The Teacher can choose to send the announcement to all students in the `Course`.
+* The mediator distributes the announcement message to all registered students.
+#### As a Student, I want to be notified of new announcements or messages from instructors so that I stay up-to-date with the course.
+Acceptance criteria:
+* Students receive notifications (e.g., visual or audio alerts) when they receive new messages from instructors.
+* Clicking the notification directs the student to the message details.
+
+#### Steps to implementation
+
+#### 1. Extend `User interface` with new 3 methods 
+* sendMessage
+* receiveMessage
+* setChatMediator
+```javascript
+/**
+ * Interface defining the basic user functionalities.
+ *
+ * @interface UserInterface
+ */
+class UserInterface {
+
+
+    /**
+     * Receives a message sent to the user through the mediator.
+     *
+     * @param {string} message - The content of the message.
+     * @param {User} from - The user who sent the message.
+     */
+    receiveMessage(message, from) {
+    }
+
+    /**
+     * Sends a message to the chat mediator.
+     *
+     * @param {string} message - The message content to send.
+     */
+    sendMessage(message) {
+    }
+
+    /**
+     * Sets the chat mediator for the student.
+     *
+     * @param {CourseMediator} mediator - The chat mediator instance.
+     */
+    setChatMediator(mediator) {
+    }
+}
+```
+#### 2. Implement CourseMediator
+```javascript
+/**
+ * Represents a mediator that facilitates communication between users in a course context.
+ *
+ * @class
+ */
+class CourseMediator {
+  /**
+   * An array of registered users within the course (teachers and students).
+   * @type {User[]}
+   */
+  users = [];
+
+  /**
+   * Creates a new CourseMediator instance.
+   */
+  constructor() {}
+
+  /**
+   * Registers a user with the mediator.
+   *
+   * @param {User} user - The user to be registered.
+   */
+  registerUser(user) {
+  }
+
+  /**
+   * Sends a message from one user to another or broadcasts to all registered users.
+   *
+   * @param {string} message - The message content.
+   * @param {User} from - The user sending the message.
+   * @param {User} [to] - The username of the recipient user (optional for broadcast messages).
+   */
+  relayMessage(message, from, to) {}
+}
+```
+
+#### 3. Implement `class Teacher` and `class Student`
+
+````javascript
+class Student extends User {
+  /**
+   * Creates a new Student object.
+   *
+   * @param {string} userId - The unique identifier for the student (optional, system generated).
+   * @param {string} username - The username the student will use for login.
+   * @param {string} email - The student's email address.
+   * @param {string} password - The student's password (hashed for security).
+   * @param {string} firstName - The student's first name.
+   * @param {string} lastName - The student's last name.
+   * @param {Date} createdAt - The date and time the student was created (optional).
+   */
+  constructor(
+          userId,
+          username,
+          email,
+          password,
+          firstName,
+          lastName,
+          createdAt = new Date()
+  ) {
+    super(
+            userId,
+            username,
+            email,
+            password,
+            firstName,
+            lastName,
+            USER_ROLES.STUDENT,
+            createdAt,
+    );
+  }
+
+  /**
+   * Sends a message to the chat mediator.
+   *
+   * @param {string} message - The message content to send.
+   */
+  sendMessage(message) {
+  }
+
+  /**
+   * Receives a message sent to the student through the mediator.
+   *
+   * @param {string} message - The content of the message.
+   * @param {User} from - The user who sent the message.
+   */
+  receiveMessage(message, from) {
+  }
+
+  /**
+   * Sets the chat mediator for the student.
+   *
+   * @param {CourseMediator} mediator - The chat mediator instance.
+   */
+  setChatMediator(mediator) {
+  }
+
+  /**
+   * Returns the user's username.
+   *
+   * @returns {string} The user's username.
+   */
+  getUserName() {
+  }
+}
+````
+````javascript
+/**
+ * Represents a teacher within the online course platform.
+ *
+ * @extends User
+ * @class
+ */
+class Teacher extends User {
+  /**
+   * Creates a new Teacher object.
+   *
+   * @param {string} userId - The unique identifier for the teacher (optional, system generated).
+   * @param {string} username - The username the teacher will use for login.
+   * @param {string} email - The teacher's email address.
+   * @param {string} password - The teacher's password (hashed for security).
+   * @param {string} firstName - The teacher's first name.
+   * @param {string} lastName - The teacher's last name.
+   * @param {Date} createdAt - The date and time the teacher was created (optional).
+   */
+  constructor(
+          userId,
+          username,
+          email,
+          password,
+          firstName,
+          lastName,
+          createdAt = new Date()
+  ) {
+    super(
+            userId,
+            username,
+            email,
+            password,
+            firstName,
+            lastName,
+            USER_ROLES.TEACHER,
+            createdAt,
+    );
+  }
+
+  /**
+   * Sends a message to the chat mediator, optionally specifying the recipient student's username.
+   *
+   * @param {string} message - The message content to send.
+   *
+   */
+  sendMessage(message) {
+  }
+
+  /**
+   * Receives a message sent to the teacher through the mediator.
+   *
+   * @param {string} message - The content of the message.
+   * @param {User} from - The user who sent the message.
+   */
+  receiveMessage(message, from) {
+  }
+
+  /**
+   * Sets the chat mediator for the teacher.
+   *
+   * @param {CourseMediator} mediator - The chat mediator instance.
+   */
+  setChatMediator(mediator) {
+  }
+
+  /**
+   * Returns the user's username.
+   *
+   * @returns {string} The user's username.
+   */
+  getUserName() {
+  }
+}
+````
