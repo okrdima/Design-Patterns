@@ -20,6 +20,7 @@ class Course {
    * @param {string} price - Price of the course.
    */
   constructor(title, description, instructorId, category, price) {
+    this._id = uuid.v4();
     this.title = title || "Default title";
     this.description = description || "Default title";
     this.instructorId = instructorId || uuid.v4();

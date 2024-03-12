@@ -2450,3 +2450,139 @@ class Teacher extends User {
   }
 }
 ````
+
+### Lab 7 ###
+> Memento pattern for Student Module
+
+#### User Story 1: Track Student Progress (As a Teacher, I want to...)
+
+#### As a Teacher, I want to see a student's current progress within a course, including completed lessons, so I can assess their learning and provide guidance.
+
+* The course management system displays a student's list of completed lessons for a specific course.
+* The system updates the completion status in real-time or after a short delay.
+#### User Story 2: Restore Student Progress (As a Student, I want to...)
+
+#### As a Student, I want to restore my progress to a previous point in a course, in case I encounter technical difficulties or need to revisit a specific lesson.
+* Upon encountering an issue, the student can access a "Restore Progress" option.
+* The system displays a list of available Mementos (snapshots of past progress) for the current course.
+* The student can select a `Memento` to restore their progress, including completed lessons and potentially their last access time.
+* The system confirms the restoration and updates the student's progress accordingly.
+
+#### Steps to implementation
+
+#### 1. Create `StudentMemento class`
+
+```javascript
+/**
+ * A class representing a memento that captures a student's progress at a specific point in time.
+ *
+ * This class is used to implement the Memento pattern for restoring student progress in a course.
+ */
+class StudentMemento {
+  /**
+   * Creates a new StudentMemento object.
+   *
+   * @param {string} courseId - The ID of the course for which this memento represents progress.
+   * @param {Lesson[]} completedLessons - An array of IDs representing the completed lessons at the time of memento creation.
+   * @param {Date} lastAccessed - The date and time the student last accessed the course.
+   */
+  constructor(courseId, completedLessons, lastAccessed) {
+    this.courseId = courseId;
+    this.completedLessons = completedLessons; // Array of completed lesson IDs
+    this.lastAccessed = lastAccessed; // Date/Time of last access
+  }
+
+  /**
+   * Retrieves the course ID associated with this memento.
+   *
+   * @returns {string} The ID of the course.
+   */
+  getCourseId() {
+  }
+
+  /**
+   * Returns a copy of the completed lessons array to avoid unintended mutation.
+   *
+   * @returns {Lesson[]} A copy of the completed lessons array.
+   */
+  getCompletedLessons() {
+  }
+
+  /**
+   * Returns a new Date object representing the last access time to avoid passing the original object by reference.
+   *
+   * @returns {Date} A new Date object representing the last access time.
+   */
+  getLastAccessed() {
+  }
+}
+```
+
+#### 2. Extend `Student class` with methods
+* `setCurrentCourse`
+* `createMemento`
+* `restoreFromMemento`
+* `getCompletedLessons`
+* `setCompletedLessons`
+* `completeLesson`
+
+```javascript
+/**
+ * Represents a student within the online course platform.
+ *
+ * @extends User
+ * @class
+ */
+class Student extends User {
+  /**
+   * Sets the current course for which the student is working. This is used for associating Mementos with specific courses.
+   *
+   * @param {string} courseId - The ID of the course the student is currently enrolled in.
+   */
+  setCurrentCourse(courseId) {
+  }
+
+  /**
+   * Creates a new memento object capturing the student's current progress in the current course.
+   *
+   * @returns {StudentMemento|null} A new StudentMemento object if successful, null otherwise (e.g., student not enrolled in a course).
+   */
+  createMemento() {
+  }
+
+  /**
+   * Attempts to restore the student's progress from the provided memento.
+   *
+   * @param {StudentMemento} memento - The memento object containing the student's progress to restore.
+   */
+  restoreFromMemento(memento) {
+  }
+
+  /**
+   * Returns a copy of the completed lessons array to avoid unintended mutation.
+   *
+   * @param {string} courseId - unique identifier of Course
+   * @returns {Lesson[]} A copy of the completed lessons array.
+   */
+  getCompletedLessons(courseId) {
+  }
+
+  /**
+   * Sets the completed lesson IDs for a specific course within the student's data.
+   *
+   * @param {string} courseId - The ID of the course for which to set the completed lessons.
+   * @param {Lesson[]} completedLessons - An array of IDs representing the student's completed lessons.
+   */
+  setCompletedLessons(courseId, completedLessons) {
+  }
+
+  /**
+   * Marks a lesson as completed for the student in the specified course.
+
+   * @param {string} courseId - The ID of the course containing the completed lesson.
+   * @param {Lesson} lesson - The ID of the lesson the student has completed.
+   */
+  completeLesson(courseId, lesson) {
+  }
+}
+```

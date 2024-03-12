@@ -8,6 +8,7 @@ const Template = require("./Template");
 const State = require("./State");
 const Interpreter = require("./Interpreter");
 const Mediator = require("./Mediator");
+const Memento = require("./Memento");
 
 module.exports = {
   Fabric,
@@ -20,4 +21,5 @@ module.exports = {
   State,
   Interpreter,
   Mediator,
+  Memento,
 };

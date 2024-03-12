@@ -11,6 +11,7 @@ const LessonState = require("~/modules/State");
 const PaymentChain = require("~/modules/Chain");
 const ExpressionInterpreter = require("~/modules/Interpreter");
 const CourseMediator = require("~/modules/Mediator");
+const StudentMemento = require("~/modules/Memento");
 
 // Lab 1
 // FabricModule();
@@ -34,4 +35,7 @@ const CourseMediator = require("~/modules/Mediator");
 
 // Lab 6
 // ExpressionInterpreter();
-CourseMediator();
+// CourseMediator();
+
+//Lab 7
+// StudentMemento();
