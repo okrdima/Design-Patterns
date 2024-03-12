@@ -105,6 +105,19 @@ class Lesson {
     if (this.state.getStateLabel() === LESSON_STATES.COMPLETED) return;
     this.setState(new CompletedState());
   }
+
+  /**
+   * Accepts a ContentVisitor object and allows it to process the Lesson.
+   *
+   * This method calls the `visitLesson` method on the provided visitor, passing the current
+   * Lesson object as an argument. This enables the visitor to interact with the specific details
+   * and functionalities associated with a Lesson.
+   *
+   * @param {ContentVisitor} visitor - The visitor object that will process the lesson.
+   */
+  acceptVisitor(visitor) {
+    visitor.visitLesson(this);
+  }
 }
 
 module.exports = Lesson;

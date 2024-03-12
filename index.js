@@ -12,6 +12,7 @@ const PaymentChain = require("~/modules/Chain");
 const ExpressionInterpreter = require("~/modules/Interpreter");
 const CourseMediator = require("~/modules/Mediator");
 const StudentMemento = require("~/modules/Memento");
+const CourseStatisticVisitor = require("~/modules/Visitor");
 
 // Lab 1
 // FabricModule();
@@ -39,3 +40,4 @@ const StudentMemento = require("~/modules/Memento");
 
 //Lab 7
 // StudentMemento();
+// CourseStatisticVisitor();

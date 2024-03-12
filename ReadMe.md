@@ -2586,3 +2586,215 @@ class Student extends User {
   }
 }
 ```
+> Visitor pattern for Course and Lesson Modules
+
+#### User Stories:
+
+#### 1. As a student, I want to...
+
+* See my progress within a course: I want to be able to access a progress report that shows me how much of a course I have completed. This report should display the percentage of completed lessons and the number of completed lessons out of the total number of lessons in the course. (This aligns with the getOverallProgress method in ContentProgressVisitor.)
+* Track my progress across different courses: I want to be able to see a summary of my progress for all the courses I'm enrolled in. This could be a list of courses with their respective completion percentages. (This would require extending the visitor or creating a separate report generation mechanism.)
+* Mark lessons as completed: I want to be able to indicate when I have finished a lesson. This should update my progress for that specific lesson and reflect in the overall course progress. (This aligns with the markCompleted method in Lesson.)
+
+##### 2.As an instructor, I want to...
+
+* Monitor student progress within my courses: I want to be able to see how my students are progressing through the course content. This could include individual student progress reports or an overall class progress report. (This would require extending the visitor or integrating it with a student management system.)
+* Identify areas where students struggle: Based on student progress data, I want to be able to identify topics or lessons where students seem to have difficulty. This can help me adjust my teaching approach or provide additional support. (Potential additional analysis logic would be needed on top of the visitor pattern.)
+
+#### Steps to implementation
+#### 1. Implement abstract `ContentVisitor` class
+```javascript
+/**
+ * Abstract class representing a visitor for processing course content elements.
+ *
+ * This class defines the core structure for visitors that can traverse and interact with
+ * different types of course content. Subclasses should implement the specific behavior for
+ * visiting each content type.
+ */
+class ContentVisitor {
+  /**
+   * Visits a Course object.
+   *
+   * Subclasses should implement the specific logic for processing a Course. This might
+   * involve actions like displaying course information or initiating further traversal of
+   * its child content elements (lessons).
+   *
+   * @param {Course} course - The Course object to visit.
+   */
+  visitCourse(course) {}
+
+  /**
+   * Visits a Lesson object.
+   *
+   * Subclasses should implement the specific logic for processing a Lesson. This might
+   * involve actions like tracking completion status, retrieving content details, or performing
+   * adjustments based on the visitor's purpose.
+   *
+   * @param {Lesson} lesson - The Lesson object to visit.
+   */
+  visitLesson(lesson) {}
+}
+```
+
+#### 2. Implement `ContentProgressVisitor` class
+
+```javascript
+/**
+ * Concrete subclass of ContentVisitor that tracks course content completion progress.
+ *
+ * This visitor specifically focuses on calculating the overall progress of a course by visiting
+ * its lessons and tracking their completion status. It inherits from the abstract `ContentVisitor`
+ * class and implements the `visitCourse` and `visitLesson` methods to achieve progress tracking.
+ */
+class ContentProgressVisitor extends ContentVisitor {
+  /**
+   * The number of completed lessons within the course.
+   * @private
+   */
+  completedLessons = 0;
+
+  /**
+   * The total number of lessons in the course.
+   * @private
+   */
+  totalLessons = 0;
+
+  /**
+   * The  number of in progress lessons within the course.
+   * @private
+   */
+  inProgressLessons = 0;
+
+  /**
+   * The ID of the course being tracked (assuming the `Course` object has an `_id` property).
+   * @private
+   */
+  courseId = null;
+
+  /**
+   * The title of the course being tracked (assuming the `Course` object has a `title` property).
+   * @private
+   */
+  courseTitle = null;
+
+  /**
+   * The category of the course being tracked (assuming the `Course` object has a `category` property).
+   * @private
+   */
+  courseCategory = null;
+
+  /**
+   * The price of the course being tracked (assuming the `Course` object has a `getPrice` method).
+   * @private
+   */
+  coursePrice = null;
+
+  /**
+   * Creates a new ContentProgressVisitor instance.
+   *
+   * @param {Course} course - The Course object for which to track progress.
+   * @throws {TypeError} - If the provided argument is not a Course object.
+   */
+  constructor(course) {
+    super();
+  }
+
+  /**
+   * Visits a Course object.
+   *
+   * This method can be overridden to implement specific logic for handling Course objects
+   * during the visitor's traversal. By default, it does nothing.
+   *
+   * @param {Course} course - The Course object being visited.
+   */
+  visitCourse(course) {
+  }
+
+  /**
+   * Visits a Lesson object and updates the completion progress.
+   *
+   * This method checks the completion status of the provided Lesson object. If the lesson
+   * is marked as completed, it increments the `completedLessons` counter. This allows the
+   * visitor to track the overall progress based on the completion of individual lessons.
+   *
+   * @param {Lesson} lesson - The Lesson object being visited.
+   */
+  visitLesson(lesson) {
+  }
+
+  /**
+   * Calculates and returns a comprehensive object representing the overall course progress and additional course details.
+   *
+   * This method goes beyond a simple progress string. It calculates the course progress percentage
+   * using the tracked `completedLessons` and `totalLessons`. Additionally, it leverages the potentially
+   * available properties of the provided `Course` object (e.g., `_id`, `title`, `category`, `getPrice`)
+   * to construct a detailed course information object. The method then returns an object containing
+   * the following properties:
+   *
+   *  - `course`: An object containing details about the course, including its ID, price, title, category,
+   *              and a flag indicating if it's free (based on the `coursePrice`).
+   *  - `inProgressLessons`: The number of lessons currently marked as "in progress".
+   *  - `completedLessons`: The number of completed lessons.
+   *  - `totalLessons`: The total number of lessons in the course.
+   *  - `progress`: A string representation of the overall course progress, similar to the previous version.
+   *
+   * @returns {object} - An object containing comprehensive course progress information.
+   */
+  getOverallProgress() {
+  }
+}
+```
+
+#### 3. Extend `Lesson` class and `Course` class for possibility to use visitor in this classes.
+```javascript
+/**
+ * Represents a learning module within a course.
+ *
+ * @class
+ */
+class Lesson {
+
+  /**
+   * Accepts a ContentVisitor object and allows it to process the Lesson.
+   *
+   * This method calls the `visitLesson` method on the provided visitor, passing the current
+   * Lesson object as an argument. This enables the visitor to interact with the specific details
+   * and functionalities associated with a Lesson.
+   *
+   * @param {ContentVisitor} visitor - The visitor object that will process the lesson.
+   */
+  acceptVisitor(visitor) {
+    visitor.visitLesson(this);
+  }
+}
+```
+
+```javascript
+/**
+ * Represents a course model within the online learning platform.
+ *
+ * @class
+ */
+class Course {
+
+  /**
+   * Accepts a ContentVisitor object and allows it to process the Course and its child Lessons.
+   *
+   * This method calls the `visitCourse` method on the provided visitor, passing the current
+   * Course object as an argument. Additionally, it iterates through the course's lessons
+   * and calls the `acceptVisitor` method on each lesson, effectively allowing the visitor
+   * to traverse the entire course content structure.
+   *
+   * @param {ContentVisitor} visitor - The visitor object that will process the course content.
+   */
+  acceptVisitor(visitor) {
+    visitor.visitCourse(this);
+    const lessonIterator = this.getLessons();
+
+    while (lessonIterator.hasNext()) {
+      const lesson = lessonIterator.next().value;
+      lesson.acceptVisitor(visitor);
+    }
+  }
+}
+```

@@ -34,11 +34,14 @@ class LessonIterator extends Iterator {
    *
    * @returns {IteratorResult<Lesson, any>} - An object with properties
    *   `done` (boolean) indicating if iteration is complete and `value`
-   *   (Lesson | undefined) containing the next lesson or `undefined`.
+   *   (Lesson | undefined) containing the next lesson or `undefined`
    */
   next() {
     if (this._currentIdx < this._lessons.length) {
-      return { done: false, value: this._lessons[this._currentIdx++] };
+      return {
+        done: false,
+        value: this._lessons[this._currentIdx++],
+      };
     } else {
       return { done: true, value: undefined };
     }

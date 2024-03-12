@@ -51,6 +51,7 @@ class CourseBuilder {
    * @param {string} [newContent] - Optional new content for the lesson (defaults to the existing content).
    * @param {string} [newContentAssetId] - Optional new content asset ID (defaults to the existing ID).
    * @param {string} [newQuizId] - Optional new quiz ID (defaults to the existing ID).
+   * @param {string|undefined} [state] - Optional new state (defaults to the state).
    * @returns {CourseBuilder} - This object instance for method chaining.
    * @throws {Error} - If an invalid lesson index is provided.
    */
@@ -60,14 +61,23 @@ class CourseBuilder {
     newContent = "",
     newContentAssetId = null,
     newQuizId = null,
+    state,
   ) {
     if (lessonIndex >= 0 && lessonIndex < this.course.lessons.length) {
+      /**
+       * The left operand of the binary expression.
+       * @type {Lesson}
+       */
       const lesson = this.course.lessons[lessonIndex];
 
       lesson.title = newTitle || lesson.title;
       lesson.content = newContent || lesson.content;
       lesson.contentAssetId = newContentAssetId || lesson.contentAssetId;
       lesson.quizId = newQuizId || lesson.quizId;
+
+      if (state) {
+        lesson.setState(state);
+      }
     } else {
       throw new Error("Invalid lesson index provided");
     }
@@ -147,6 +157,18 @@ class CourseBuilder {
    */
   getCourse() {
     return this.course;
+  }
+
+  /**
+   * Resets the course builder to its initial state.
+   *
+   * @method
+   * @param {string} price - The price of the course
+   * @returns {CourseBuilder} - This object instance for method chaining.
+   */
+  setCoursePrice(price) {
+    this.course.price = price;
+    return this;
   }
 
   /**
