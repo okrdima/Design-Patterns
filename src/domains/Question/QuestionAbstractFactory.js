@@ -3,7 +3,7 @@ const {
   MultipleChoiceQuestion,
   FreeAnswerQuestion,
   DragAndDropQuestion,
-} = require("~/domains/Question");
+} = require("~/domains/Question/TypeQuestions");
 const { QUESTION_TYPES } = require("~/__constants__");
 
 /**

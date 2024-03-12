@@ -1,0 +1,8 @@
+const PAYMENT_TYPES = {
+  PAY_PAL: "PAY_PAL",
+  MASTER_CARD: "MASTER_CARD",
+  GOOGLE_PAY: "GOOGLE_PAY",
+  APPLE_PAY: "APPLE_PAY",
+};
+
+module.exports = PAYMENT_TYPES;

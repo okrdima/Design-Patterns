@@ -12,8 +12,18 @@ class Question {
     this.type = type;
   }
 
+  /**
+   * Gets the question from the source.
+   *
+   * @return {string} the question
+   */
   getQuestion() {}
 
+  /**
+   * Retrieves the answer key based on the question type.
+   *
+   * @return {type} The answer key in a format that varies based on the question type.
+   */
   getAnswerKey() {} // Answer format varies based on question type.
 }
 

@@ -1,38 +1,56 @@
+const Course = require("~/domains/Course/Course");
+const uuid = require("uuid");
+const { COURSE_CATEGORY_TYPES } = require("~/__constants__");
+const { Lesson } = require("~/domains/Lesson");
+
 /**
- * Abstract Course Prototype class defining the interface for concrete course implementations.
+ * Represents a blueprint or template for course creation using the Prototype design pattern.
+ *
+ * @class
  */
 class CoursePrototype {
   /**
-   * Creates a new CoursePrototype instance.
+   * Creates a new CoursePrototype object.
    *
-   * @param {string} title - The title of the course.
-   * @param {string} level - The CEFR level of the course (e.g., "A1", "B2").
-   * @param {string} description - A description of the course content.
+   * @constructor
+   * @param {string} title - The title of the course prototype.
+   * @param {string} description - A detailed description of the course content and objectives.
+   * @param {string} instructorId - The ID of the instructor who created the course.
+   * @param {string} [category] - An optional category to classify the course by subject or skill.
+   * @param {Lesson[]} lessonTemplates - An array of Lesson objects representing the lesson structure.
    */
-  constructor(title, level, description) {
+  constructor(title, description, instructorId, category, lessonTemplates) {
     this.title = title;
-    this.level = level;
     this.description = description;
+    this.instructorId = instructorId || uuid.v4();
+    this.category = category || COURSE_CATEGORY_TYPES.LIFE_STYLE;
+    this.lessonTemplates = [...lessonTemplates]; // Create a copy to prevent modification
   }
 
   /**
-   * Abstract method that must be implemented in concrete subclasses to return a list of module names.
+   * Creates a new Course object based on the current CoursePrototype.
    *
-   * @throws {Error} An error if the method is not implemented in a concrete subclass.
-   * @returns {string[]} An array of module names (implementation required in concrete subclasses).
-   */
-  getModules() {
-    throw new Error("This method is not implemented");
-  }
-
-  /**
-   * Abstract method that must be implemented in concrete subclasses to create a deep copy of the object.
-   *
-   * @throws {Error} An error if the method is not implemented in a concrete subclass.
-   * @returns {CoursePrototype} A deep copy of the current object (implementation required in concrete subclasses).
+   * @method
+   * @returns {Course} - A new Course object with a copy of the lesson structure.
    */
   clone() {
-    throw new Error("This method is not implemented");
+    // Create a new Course object and copy lessonTemplates (deep copy recommended for complex objects)
+    const newCourse = new Course(
+      this.title,
+      this.description,
+      this.instructorId,
+      this.category,
+    );
+    newCourse.lessons = this.lessonTemplates.map((lesson) => {
+      return new Lesson(
+        lesson.title,
+        lesson.order,
+        lesson.content,
+        lesson.contentAssetId,
+        lesson.quizId,
+      );
+    }); // Deep copy of lessons
+    return newCourse;
   }
 }
 

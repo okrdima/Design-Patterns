@@ -1,4 +1,3 @@
-const QuestionFactory = require("./QuestionFactory");
-const QuestionAbstractFactory = require("./QuestionAbstractFactory");
+const FabricModule = require("./FabricModule");
 
-module.exports = { QuestionFactory, QuestionAbstractFactory };
+module.exports = FabricModule;

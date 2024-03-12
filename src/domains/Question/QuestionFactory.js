@@ -4,7 +4,7 @@ const {
   MultipleChoiceQuestion,
   DragAndDropQuestion,
   FreeAnswerQuestion,
-} = require("~/domains/Question");
+} = require("~/domains/Question/TypeQuestions");
 
 /**
  * A factory class for creating different question objects based on their type.

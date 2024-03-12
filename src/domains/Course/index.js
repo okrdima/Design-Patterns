@@ -1,4 +1,13 @@
+const Course = require("./Course");
 const CoursePrototype = require("./CoursePrototype");
-const BusinessEnglishCourse = require("./BusinessEnglishCourse");
+const CourseBuilder = require("./CourseBuilder");
+const CourseCompletionObserver = require("./CourseCompletionObserver");
+const CourseActionsCommand = require("./CourseActionsCommand");
 
-module.exports = { CoursePrototype, BusinessEnglishCourse };
+module.exports = {
+  Course,
+  CoursePrototype,
+  CourseBuilder,
+  CourseCompletionObserver,
+  CourseActionsCommand,
+};

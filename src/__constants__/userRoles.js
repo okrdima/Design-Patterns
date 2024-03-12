@@ -1,0 +1,7 @@
+const USER_ROLES = {
+  ADMINISTRATOR: "ADMINISTRATOR",
+  TEACHER: "TEACHER",
+  STUDENT: "STUDENT",
+};
+
+module.exports = USER_ROLES;
