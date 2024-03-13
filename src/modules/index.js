@@ -1,18 +1,18 @@
-const Fabric = require("./Fabric");
-const Builder = require("./Builder");
-const Prototype = require("./Prototype");
-const Strategy = require("./Strategy");
-const Observer = require("./Observer");
-const Command = require("./Command");
-const Template = require("./Template");
-const State = require("./State");
-const Interpreter = require("./Interpreter");
-const Mediator = require("./Mediator");
-const Memento = require("./Memento");
-const Visitor = require("./Visitor");
-const Facade = require("./Facade");
-const Proxy = require("./Proxy");
-const Bridge = require("./Bridge");
+const Fabric = require("./creational/Fabric");
+const Builder = require("./creational/Builder");
+const Prototype = require("./creational/Prototype");
+const Strategy = require("./behavioral/Strategy");
+const Observer = require("./behavioral/Observer");
+const Command = require("./behavioral/Command");
+const Template = require("./behavioral/Template");
+const State = require("./behavioral/State");
+const Interpreter = require("./behavioral/Interpreter");
+const Mediator = require("./behavioral/Mediator");
+const Memento = require("./behavioral/Memento");
+const Visitor = require("./behavioral/Visitor");
+const Facade = require("./structural/Facade");
+const Proxy = require("./structural/Proxy");
+const Bridge = require("./structural/Bridge");
 
 module.exports = {
   Fabric,

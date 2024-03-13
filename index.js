@@ -1,21 +1,21 @@
 require("module-alias/register");
-const FabricModule = require("~/modules/Fabric");
-const BuilderModule = require("~/modules/Builder");
-const PrototypeModule = require("~/modules/Prototype");
-const LessonStrategy = require("~/modules/Strategy");
-const CourseObserver = require("~/modules/Observer");
-const CourseCommand = require("~/modules/Command");
-const ContentTemplate = require("~/modules/Template");
-const LessonIterator = require("~/modules/Iterator");
-const LessonState = require("~/modules/State");
-const PaymentChain = require("~/modules/Chain");
-const ExpressionInterpreter = require("~/modules/Interpreter");
-const CourseMediator = require("~/modules/Mediator");
-const StudentMemento = require("~/modules/Memento");
-const CourseStatisticVisitor = require("~/modules/Visitor");
-const ContentDeliveryFacade = require("~/modules/Facade");
-const ProxyContent = require("~/modules/Proxy");
-const MediaContentBridge = require("~/modules/Bridge");
+const FabricModule = require("src/modules/creational/Fabric");
+const BuilderModule = require("src/modules/creational/Builder");
+const PrototypeModule = require("src/modules/creational/Prototype");
+const LessonStrategy = require("src/modules/behavioral/Strategy");
+const CourseObserver = require("src/modules/behavioral/Observer");
+const CourseCommand = require("src/modules/behavioral/Command");
+const ContentTemplate = require("src/modules/behavioral/Template");
+const LessonIterator = require("src/modules/behavioral/Iterator");
+const LessonState = require("src/modules/behavioral/State");
+const PaymentChain = require("src/modules/behavioral/Chain");
+const ExpressionInterpreter = require("src/modules/behavioral/Interpreter");
+const CourseMediator = require("src/modules/behavioral/Mediator");
+const StudentMemento = require("src/modules/behavioral/Memento");
+const CourseStatisticVisitor = require("src/modules/behavioral/Visitor");
+const ContentDeliveryFacade = require("src/modules/structural/Facade");
+const ProxyContent = require("src/modules/structural/Proxy");
+const MediaContentBridge = require("src/modules/structural/Bridge");
 
 // Lab 1
 // FabricModule();
