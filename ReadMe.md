@@ -1351,7 +1351,7 @@ class DefineLearningObjectivesStep extends ContentTemplateStep {
   execute() {}
 }
 ```
-### Lab 5###
+### Lab 5 ###
 > Iterator pattern for Lesson Module
 
 #### User Stories:
@@ -2795,6 +2795,140 @@ class Course {
       const lesson = lessonIterator.next().value;
       lesson.acceptVisitor(visitor);
     }
+  }
+}
+```
+### Lab 8 ###
+> Facade pattern for Content  module
+
+#### 1.As a student, I want to:
+
+* See the course content for a course I'm enrolled in.
+* See only the content that I have access to based on my enrollment status and permissions.
+* Have the course content presented in a clear and organized way, differentiating between different content types (e.g., videos, lectures, quizzes).
+* Be able to access video content directly within the platform.
+* Be able to read text content and answer quizzes within the platform.
+#### 2. As an Administrator, I want to:
+
+Easily control which content students enrolled in my course can access.
+Be able to see the different types of content available in my course.
+
+#### Steps to implementation
+#### 1. Implement abstract class `Content`
+
+```javascript
+class Content {
+  /**
+   * Creates a new Content object.
+   *
+   * @param {string} title - The title of the content piece.
+   * @param {string} type - The type of content (e.g., "lecture", "quiz", "assignment").
+   * @param {*} content - The actual content data (format depends on the type).
+   */
+  constructor(title, type, content) {
+    // Abstract content type
+    this.title = title;
+    this.type = type;
+    this.content = content;
+  }
+}
+```
+
+#### 2. Implement subclasses based on `Content` abstract class
+* `TextContent` class
+* `VideoContent` class
+* `QuizContent` class
+
+```javascript
+class QuizContent extends Content {
+  /**
+   * Creates a new QuizContent object.
+   *
+   * @param {string} title - The title of the quiz.
+   * @param {array} questions - An array of question objects with specific structure
+   *                             (replace 'array' with the actual question structure).
+   */
+  constructor(title, questions) {
+    super(title, CONTENT_TYPES.QUIZ, questions);
+  }
+}
+```
+
+```javascript
+class VideoContent extends Content {
+  /**
+   * Creates a new VideoContent object.
+   *
+   * @param {string} title - The title of the video content.
+   * @param {string} videoUrl - The URL of the video.
+   */
+  constructor(title, videoUrl) {
+    super(title, CONTENT_TYPES.VIDEO, videoUrl);
+  }
+}
+```
+
+
+```javascript
+class TextContent extends Content {
+  /**
+   * Creates a new TextContent object.
+   *
+   * @param {string} title - The title of the text content.
+   * @param {string} text - The actual text content.
+   */
+  constructor(title, text) {
+    super(title, CONTENT_TYPES.TEXT, text);
+  }
+}
+```
+
+#### 3. Extend class `Course` with new method `getCourseContent`
+
+```javascript
+class Course {
+  /**
+   * (Assuming this method exists within your Course class)
+   *
+   * Retrieves the course content, potentially using an iterator or other mechanism.
+   *
+   * @returns {Lesson[]} - An array of lesson objects.
+   */
+  getCourseContent() {
+  }
+}
+```
+#### 4. Implement `ContentDeliveryFacade` class 
+
+```javascript
+/**
+ *  A facade class that simplifies access to and delivery of course content.
+ */
+class ContentDeliveryFacade {
+  /**
+   * Creates a new ContentDeliveryFacade instance associated with a specific course.
+   *
+   * @param {Course} course - The course object for which to provide content delivery.
+   */
+  constructor(course) {
+    this.course = course;
+  }
+
+  /**
+   * Retrieves and prepares the course content for delivery, considering user enrollment and permissions.
+   *
+   * @returns {Content[]} - An array of formatted Content objects representing the course content.
+   */
+  getCourseContent() {
+  }
+
+  /**
+   * Prepares the provided course content for delivery by converting it into appropriate Content objects.
+   *
+   * @param {Lesson[]} content - An array of lesson objects (structure may vary).
+   * @returns {Content[]} - An array of formatted Content objects.
+   */
+  prepareContentForDelivery(content) {
   }
 }
 ```

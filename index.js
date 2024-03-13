@@ -13,6 +13,7 @@ const ExpressionInterpreter = require("~/modules/Interpreter");
 const CourseMediator = require("~/modules/Mediator");
 const StudentMemento = require("~/modules/Memento");
 const CourseStatisticVisitor = require("~/modules/Visitor");
+const ContentDeliveryFacade = require("~/modules/Facade");
 
 // Lab 1
 // FabricModule();
@@ -41,3 +42,6 @@ const CourseStatisticVisitor = require("~/modules/Visitor");
 //Lab 7
 // StudentMemento();
 // CourseStatisticVisitor();
+
+//Lab8
+// ContentDeliveryFacade();

@@ -144,6 +144,26 @@ class Course {
       lesson.acceptVisitor(visitor);
     }
   }
+
+  /**
+   * (Assuming this method exists within your Course class)
+   *
+   * Retrieves the course content, potentially using an iterator or other mechanism.
+   *
+   * @returns {Lesson[]} - An array of lesson objects.
+   */
+  getCourseContent() {
+    const lessonIterator = this.getLessons();
+
+    const contents = [];
+    while (lessonIterator.hasNext()) {
+      const lesson = lessonIterator.next().value;
+
+      contents.push(lesson);
+    }
+
+    return contents;
+  }
 }
 
 module.exports = Course;
