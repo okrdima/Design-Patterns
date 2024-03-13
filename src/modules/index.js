@@ -12,6 +12,7 @@ const Memento = require("./Memento");
 const Visitor = require("./Visitor");
 const Facade = require("./Facade");
 const Proxy = require("./Proxy");
+const Bridge = require("./Bridge");
 
 module.exports = {
   Fabric,
@@ -28,4 +29,5 @@ module.exports = {
   Visitor,
   Facade,
   Proxy,
+  Bridge,
 };

@@ -3082,4 +3082,339 @@ class SecureTextContentProxy extends SecureContentProxy {
 }
 ```
 
-> Bridge patter for Module
+> Bridge patter for Content Module
+
+#### 1. As a student, I want to be able to play video lectures, audio recordings, and text documents within the course platform.
+
+#### Acceptance criteria:
+* The system should support different content types like videos, audio, and text files.
+* When a student attempts to play content, the system should use an appropriate player based on the content type.
+* Videos should be played using a video player with functionalities like play, pause, and stop.
+* Audio recordings should be played using an audio player with similar functionalities.
+* Text documents should be displayed or read aloud (depending on implementation) when played.
+
+#### 1. Define `ContentPlayer` Interface
+```javascript
+/**
+ * Interface defining the basic functionalities for content playback.
+ */
+class ContentPlayer {
+  /**
+   * Starts playback of the content.
+   */
+  play() {}
+
+  /**
+   * Pauses playback of the content.
+   */
+  pause() {}
+
+  /**
+   * Stops playback of the content and resets the playback position.
+   */
+  stop() {}
+
+  /**
+   * Seeks to a specific position in the content (optional).
+   *
+   * @param {number} position - The target position within the content.
+   */
+  seek(position) {}
+}
+```
+
+#### 2. Implement Concrete Player Classes:
+* `VideoPlayer`
+* `AudioPlayer`
+* `TextFileReader`
+
+```javascript
+/**
+ * A concrete player class for video content.
+ */
+class VideoPlayer extends ContentPlayer {
+  /**
+   * Reference to a mock video element for demonstration purposes.
+   *
+   *
+   */
+  videoElement = {
+    src: null,
+    currentTime: 0,
+    play: () => {
+      console.log("Video played");
+    },
+    pause: () => {
+      console.log("Video paused");
+    },
+    stop: () => {
+      console.log("Video stopped");
+    },
+  };
+
+  /**
+   * Creates a new VideoPlayer instance for the provided video URL.
+   *
+   * @param {string} videoUrl - The URL of the video content.
+   */
+  constructor(videoUrl) {
+    super();
+  }
+
+  /**
+   * Starts playback of the video.
+   *
+   * @inheritdoc
+   */
+  play() {
+  }
+
+  /**
+   * Pauses playback of the video.
+   *
+   * @inheritdoc
+   */
+  pause() {
+  }
+
+  /**
+   * Stops playback of the video and resets the playback time.
+   *
+   * @inheritdoc
+   */
+  stop() {
+  }
+
+  /**
+   * Seeks to a specific position in the video.
+   *
+   * @param {number} position - The target position (in seconds) within the video.
+   *
+   * @inheritdoc
+   */
+  seek(position) {
+  }
+}
+```
+
+```javascript
+/**
+ * A concrete player class for audio content.
+ */
+class AudioPlayer extends ContentPlayer {
+  /**
+   * Reference to a mock audio element for demonstration purposes.
+   *
+   * (Replace this with your actual implementation using an audio element from the DOM).
+   */
+  audioElement = {
+    src: null,
+    currentTime: 0,
+    play: () => {
+      console.log("Audio played");
+    },
+    pause: () => {
+      console.log("Audio paused");
+    },
+    stop: () => {
+      console.log("Audio stopped");
+    },
+  };
+
+  /**
+   * Creates a new AudioPlayer instance for the provided audio URL.
+   *
+   * @param {string} audioUrl - The URL of the audio content.
+   */
+  constructor(audioUrl) {
+    super();
+    this.audioElement.src = audioUrl;
+  }
+
+  /**
+   * Starts playback of the audio.
+   *
+   * @inheritdoc
+   */
+  play() {
+  }
+
+  /**
+   * Pauses playback of the audio.
+   *
+   * @inheritdoc
+   */
+  pause() {
+  }
+
+  /**
+   * Stops playback of the audio and resets the playback time.
+   *
+   * @inheritdoc
+   */
+  stop() {
+  }
+
+  /**
+   * Seeks to a specific position in the audio.
+   *
+   * @param {number} position - The target position (in seconds) within the audio.
+   *
+   * @inheritdoc
+   */
+  seek(position) {
+  }
+}
+```
+
+```javascript
+/**
+ * A concrete player class for text content.
+ */
+class TextFileReader extends ContentPlayer {
+  /**
+   * The text content to be displayed or read aloud.
+   */
+  textContent;
+
+  /**
+   * Creates a new TextFileReader instance for the provided text content.
+   *
+   * @param {string} textContent - The text content to be played.
+   */
+  constructor(textContent) {
+    super();
+    this.textContent = textContent;
+  }
+
+  /**
+   * Simulates "playing" text content (e.g., display or read aloud).
+   *
+   * @inheritdoc
+   */
+  play() {
+    console.log("Displaying text content:", this.textContent);
+  }
+
+  /**
+   * Not applicable for text content.
+   *
+   * @inheritdoc
+   */
+  pause() {
+    // No action needed
+  }
+
+  /**
+   * Not applicable for text content.
+   *
+   * @inheritdoc
+   */
+  stop() {
+    // No action needed
+  }
+
+  /**
+   * Not applicable for text content (optional).
+   *
+   * @inheritdoc
+   */
+  seek(position) {
+    // No seeking functionality for text
+  }
+}
+```
+
+#### 3. Implement `Player` class
+
+```javascript
+
+/**
+ * Placeholder function for fetching text content.
+ *
+ * (Replace this function with your actual implementation for fetching text content)
+ *
+ * @param {string} textUrl - The URL of the text content.
+ * @returns {string} - The fetched text content (placeholder implementation returns the URL).
+ */
+const fetchTextContent = (textUrl) => textUrl;
+
+/**
+ * This class represents a content object with associated playback functionalities.
+ */
+class Player {
+  /**
+   * Title of the content.
+   */
+  title;
+
+  /**
+   * URL of the content.
+   */
+  contentUrl;
+
+  /**
+   * Reference to the chosen player instance for this content.
+   */
+  player;
+
+  /**
+   * Creates a new Player instance for the provided content.
+   *
+   * @param {string} title - The title of the content.
+   * @param {string} contentUrl - The URL of the content.
+   */
+  constructor(title, contentUrl) {
+    this.title = title;
+    this.contentUrl = contentUrl;
+    this.player = null; // Initialize player lazily
+  }
+
+  /**
+   * Starts playback of the content.
+   *
+   * The player instance is chosen based on the content URL and automatically
+   * handles playback logic for the specific content type (video, audio, text).
+   */
+
+  play() {
+  }
+
+  /**
+   * Pauses playback of the content.
+   */
+  pause() {
+  }
+
+  /**
+   * Stops playback of the content and resets the playback position.
+   */
+  stop() {
+  }
+
+  /**
+   * Seeks to a specific position in the content (optional).
+   *
+   * Not all content types support seeking (e.g., text content).
+   */
+  seek() {
+  }
+}
+```
+
+#### 4. Implement `getContentType` function
+
+```javascript
+/**
+ * Determines the content type based on the file extension extracted from the URL.
+ *
+ * @param {string} url - The URL of the content.
+ * @returns {VIDEO|AUDIO|TEXT} - The inferred content type (replace with your actual enum).
+ */
+function getContentType(url) {
+  const parts = url.split(".");
+  const fileExtension = parts[parts.length - 1].toLowerCase(); // Extract and lowercase the file extension
+
+  return FILE_EXTENSION_TO_TYPE[fileExtension];
+}
+```
