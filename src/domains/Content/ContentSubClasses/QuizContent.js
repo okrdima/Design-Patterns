@@ -9,7 +9,7 @@ class QuizContent extends Content {
    * Creates a new QuizContent object.
    *
    * @param {string} title - The title of the quiz.
-   * @param {array} questions - An array of question objects with specific structure
+   * @param {Question[]} questions - An array of question objects with specific structure
    *                             (replace 'array' with the actual question structure).
    */
   constructor(title, questions) {

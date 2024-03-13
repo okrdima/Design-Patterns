@@ -14,6 +14,7 @@ const CourseMediator = require("~/modules/Mediator");
 const StudentMemento = require("~/modules/Memento");
 const CourseStatisticVisitor = require("~/modules/Visitor");
 const ContentDeliveryFacade = require("~/modules/Facade");
+const ProxyContent = require("~/modules/Proxy");
 
 // Lab 1
 // FabricModule();
@@ -45,3 +46,4 @@ const ContentDeliveryFacade = require("~/modules/Facade");
 
 //Lab8
 // ContentDeliveryFacade();
+// ProxyContent();

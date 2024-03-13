@@ -11,6 +11,7 @@ const Mediator = require("./Mediator");
 const Memento = require("./Memento");
 const Visitor = require("./Visitor");
 const Facade = require("./Facade");
+const Proxy = require("./Proxy");
 
 module.exports = {
   Fabric,
@@ -26,4 +27,5 @@ module.exports = {
   Memento,
   Visitor,
   Facade,
+  Proxy,
 };

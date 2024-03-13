@@ -16,7 +16,7 @@ class Lesson {
    * @constructor
    * @param {string} title - The title of the lesson.
    * @param {number} order - The sequential order of the lesson within the course.
-   * @param {string} [content] - Optional textual content for the lesson. Defaults to an empty string.
+   * @param {string|VideoContent|TextContent|QuizContent} [content] - Optional textual content for the lesson. Defaults to an empty string.
    * @param {string|null} [contentAssetId] - Optional foreign key referencing a content asset (e.g., PDF, video).
    * @param {string|null} [quizId] - Optional foreign key referencing a quiz associated with the lesson.
    * @param {LessonDeliveryStrategy|null} deliveryStrategy - The LessonDeliveryStrategy object defining the delivery method for this lesson.

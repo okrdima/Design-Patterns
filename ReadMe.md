@@ -2745,7 +2745,7 @@ class ContentProgressVisitor extends ContentVisitor {
 }
 ```
 
-#### 3. Extend `Lesson` class and `Course` class for possibility to use visitor in this classes.
+#### 3. Extend `Lesson` class and `Course` class for possibility to use visitor in these classes.
 ```javascript
 /**
  * Represents a learning module within a course.
@@ -2932,3 +2932,154 @@ class ContentDeliveryFacade {
   }
 }
 ```
+> Proxy pattern for Content Module
+
+
+#### User Stories for Secure Content Proxy
+
+#### 1.As a student enrolled in a course, I want to be able to access the course materials, including videos, quizzes, and text documents, but only if I am authorized to do so.
+
+##### Acceptance criteria:
+* The system should differentiate between secure and non-secure content.
+* When a student attempts to access secure content, the system should check their authorization.
+* Authorized students should be able to access the content.
+* Unauthorized students should be denied access and receive an appropriate error message.
+
+#### Steps to implementation
+
+#### 1. Create an interface named `SecureContent` that extends your existing Content interface.
+
+```javascript
+/**
+ *  An interface representing secure content within a course.
+ *  Extends the base Content class to add authorization checks.
+ *
+ *  @extends Content
+ */
+class SecureContent extends Content {
+  /**
+   * Returns true if the current user is authorized to access this content, false otherwise.
+   *
+   * @returns {Promise<boolean>} - True if authorized, false otherwise.
+   */
+  isAuthorized() {}
+}
+```
+#### 2. Implement `SecureContentProxy` class
+```javascript
+/**
+ *  A base class for providing secure access to content within a course.
+ *  Implements the SecureContent interface and handles lazy loading and authorization checks.
+ *
+ *  @extends SecureContent
+ */
+class SecureContentProxy extends SecureContent {
+  /**
+   * Stores the actual content object fetched lazily.
+   * @type {Content}
+   */
+  content = null;
+
+  /**
+   * A function that retrieves the content asynchronously.
+   * @typedef {function(): Promise<Content>} ContentProvider
+   */
+
+  /**
+   * Creates a new SecureContentProxy instance.
+   *
+   * @param {ContentProvider} contentProvider - A function that retrieves the content asynchronously.
+   */
+  constructor(contentProvider) {
+    super();
+    this.contentProvider = contentProvider;
+  }
+
+  /**
+   * Downloads the secure content and performs authorization checks before providing access.
+   *
+   * @async
+   * @throws {Error} - If authorization fails.
+   * @returns {Promise<Content>} - The downloaded and authorized content object.
+   */
+  async download() {
+  }
+
+  /**
+   * Performs an authorization check to determine if the user can access this content.
+   *
+   * (Replace this function with your actual implementation for authorization logic)
+   *
+   * @async
+   * @abstract
+   * @returns {Promise<boolean>} - True if authorized, false otherwise.
+   */
+  async isAuthorized() {
+    return await checkAuthorization();
+  }
+}
+```
+
+#### 3. Implement SecureContentProxy Classes
+* `SecureQuizContentProxy`
+* `SecureTextContentProxy`
+* `SecureVideoContentProxy`
+
+```javascript
+/**
+ *  A concrete class that acts as a proxy for secure video content.
+ *  Extends the SecureContentProxy base class to handle video content specifically.
+ *
+ *  @extends SecureContentProxy
+ */
+class SecureVideoContentProxy extends SecureContentProxy {
+  /**
+   * Creates a new SecureVideoContentProxy instance.
+   *
+   * @param {string} videoUrl - The URL of the secure video content.
+   */
+  constructor(videoUrl) {
+    super(() => fetchVideoContent(videoUrl)); // Assume `fetchVideoContent` fetches video asynchronously
+  }
+}
+```
+
+```javascript
+/**
+ *  A concrete class that acts as a proxy for secure quiz content.
+ *  Extends the SecureContentProxy base class to handle quiz content specifically.
+ *
+ *  @extends SecureContentProxy
+ */
+class SecureQuizContentProxy extends SecureContentProxy {
+  /**
+   * Creates a new SecureQuizContentProxy instance.
+   *
+   * @param {string} quizUrl - The URL of the secure quiz content.
+   */
+  constructor(quizUrl) {
+    super(() => fetchQuizContent(quizUrl)); // Assume `fetchQuizContent` fetches quiz data asynchronously
+  }
+}
+````
+
+```javascript
+/**
+ *  A concrete class that acts as a proxy for secure text content.
+ *  Extends the SecureContentProxy base class to handle text content specifically.
+ *
+ *  @extends SecureContentProxy
+ */
+class SecureTextContentProxy extends SecureContentProxy {
+  /**
+   * Creates a new SecureTextContentProxy instance.
+   *
+   * @param {string} textUrl - The URL of the secure text content.
+   */
+  constructor(textUrl) {
+    super(() => fetchTextContent(textUrl));
+  }
+}
+```
+
+> Bridge patter for Module

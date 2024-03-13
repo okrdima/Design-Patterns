@@ -4,6 +4,7 @@ const LESSON_STATES = require("./lessonStates");
 const USER_ROLES = require("./userRoles");
 const PAYMENT_TYPES = require("./paymentTypes");
 const CONTENT_TYPES = require("./contentTypes");
+const MEDIA_CONTENT_TYPES = require("./mediaContentTypes");
 
 module.exports = {
   QUESTION_TYPES,
@@ -12,4 +13,5 @@ module.exports = {
   USER_ROLES,
   PAYMENT_TYPES,
   CONTENT_TYPES,
+  MEDIA_CONTENT_TYPES,
 };
